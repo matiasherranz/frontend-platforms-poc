@@ -16,7 +16,7 @@ The idea of this repo is to investigate and take for a ride (building a little P
 - Support for Typescript,
 - (etc).
 
-# How to `use` this repo?
+# How to use this repo?
 
 Take a look at each of the folders (except from "shared", that has some common code to test the examples). Each one has a Readme with context and instructions:
 
