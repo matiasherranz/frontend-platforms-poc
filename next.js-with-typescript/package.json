@@ -1,6 +1,7 @@
 {
   "name": "frontend-platforms-poc",
   "version": "0.1.0",
+  "author": "Martin Quintana <martinquintana@ipsy.com>",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,8 +11,10 @@
   },
   "dependencies": {
     "next": "9.4.4",
+    "next-transpile-modules": "^3.3.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "shared": "../shared"
   },
   "devDependencies": {
     "@types/node": "^14.0.10",
