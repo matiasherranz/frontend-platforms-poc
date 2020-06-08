@@ -24,12 +24,15 @@ Take a look at each of the folders (except from "shared", that has some common c
 frontend-platforms-poc
 .
 ├── README.md
+├── .gitignore
+├── cra-seo-apollo-ssr
 ├── create-react-app-typescript
+├── next.js-with-apollo-app-typescript
 ├── next.js-with-typescript
 ├── razzle-with-typescript
 └── shared
 
-4 directories, 1 file
+6 directories, 2 files
 ```
 
 # Contributors
