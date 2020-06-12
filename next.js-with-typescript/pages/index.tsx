@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import Head from 'next/head'
 import Layout from '../components/Layout'
+import AddressForm from 'react-common/dist/es5/forms/AddressForm'
 
 export default function Home(): ReactElement {
   return (
@@ -10,7 +11,12 @@ export default function Home(): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout />
+      <Layout>
+        <div className="container padding-v">
+          <div className="h1">This is a react-common components test</div>
+          <AddressForm />
+        </div>
+      </Layout>
     </>
   )
 }

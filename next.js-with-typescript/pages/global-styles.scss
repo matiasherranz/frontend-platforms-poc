@@ -1,4 +1,11 @@
-@import "~react-common/src/components/Header/Header.scss";
+@import "~ipsy-core-styles/scss/partials/variables";
+@import "~ipsy-core-styles/scss/partials/mixins";
+@import "~ipsy-core-styles/scss/partials/grid";
+@import "~react-common/src/components/Grid/Grid";
+@import "~react-common/src/components/Header/Header";
+@import "~react-common/src/components/Footer/Footer";
+@import "~react-common/src/components/Input/Input";
+@import "~react-common/src/components/Dropdown/Dropdown";
 
 // This is a hack for showing the body content
 // This was hidden by default on legacy Angular code
