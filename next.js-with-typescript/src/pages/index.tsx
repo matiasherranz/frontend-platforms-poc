@@ -1,5 +1,8 @@
 import { ReactElement } from 'react'
 import Head from 'next/head'
+// import ErrorBoundary from '../components/ErrorBoundary'
+// import { ErroneousComponent } from '../components/ErroneousComponent'
+// import { Error } from '../components/Error'
 
 export default function Home(): ReactElement {
   return (
@@ -14,8 +17,15 @@ export default function Home(): ReactElement {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
+        {/* Error boundaries should only be used in Client side components.  */}
+        {/* It isn't supported in server side */}
+
+        {/* <ErrorBoundary fallback={<Error />}>
+          <ErroneousComponent />
+        </ErrorBoundary> */}
+
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          Get started by editing <code>src/index.js</code>
         </p>
 
         <div className="grid">
