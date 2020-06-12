@@ -1,27 +1,22 @@
-import axios, { AxiosResponse } from 'axios'
 import { LogCountService } from './logCountService'
-import { LOG_SERVER_URL } from '../utils/constants'
+import { LoggingService, SentryLoggingService } from './loggingService'
+import { ErrorInfo } from 'react'
 
 export class ErrorService {
   constructor(
-    private logCountService: LogCountService = new LogCountService()
+    private logCountService: LogCountService = new LogCountService(),
+    private loggingService: LoggingService = new SentryLoggingService()
   ) {
     if (process.browser) {
-      window.addEventListener('error', this.logError)
+      window.addEventListener('error', this.logWindowError)
       window.addEventListener('unload', () =>
-        window.removeEventListener('error', this.logError)
+        window.removeEventListener('error', this.logWindowError)
       )
     }
   }
 
-  logError = (error: ErrorEvent | Error): boolean => {
+  private prepareData = (error: ErrorEvent | Error) => {
     const errorMessage = error.message
-
-    this.logCountService.trackException(errorMessage)
-    if (!this.logCountService.shouldLogErrorToServer(errorMessage)) {
-      return false
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: Record<string, any> = {
       browser: window.navigator.userAgent,
@@ -31,7 +26,7 @@ export class ErrorService {
       appPlatformType: 'nextjs-spa',
     }
 
-    if ('filename' in error) {
+    if (typeof error !== 'string' && 'filename' in error) {
       // ErrorEvent type
       console.debug(
         '[ErrorService] Error caught:',
@@ -45,17 +40,48 @@ export class ErrorService {
       console.debug('[ErrorService] Error caught:', errorMessage, error.stack)
       data.stackTrace = error.stack
     }
+  }
 
-    this.logErrorToServer(data)
+  logWindowError = (error: ErrorEvent): boolean => {
+    const shouldLogErrorToService = this.logError(error)
+
+    if (shouldLogErrorToService) {
+      this.logErrorWithExternalService(this.prepareData(error))
+    }
+
+    return false
+  }
+
+  logBoundaryError = (
+    error: ErrorEvent | Error,
+    errorInfo: ErrorInfo
+  ): boolean => {
+    const shouldLogErrorToService = this.logError(error)
+
+    if (shouldLogErrorToService) {
+      this.logErrorWithExternalService({ error, errorInfo })
+    }
+
+    return false
+  }
+
+  logError = (error: ErrorEvent | Error): boolean => {
+    const errorMessage = error.message
+
+    this.logCountService.trackException(errorMessage)
+    if (!this.logCountService.shouldLogErrorToServer(errorMessage)) {
+      return false
+    }
 
     // Just let default handler run.
     return false
   }
 
-  private logErrorToServer = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: Record<string, any>
-  ): Promise<AxiosResponse<void>> => {
-    return axios.post(LOG_SERVER_URL, data)
+  private logErrorWithExternalService = async (data: any) => {
+    try {
+      this.loggingService.logError(data)
+    } catch (e) {
+      console.error(e)
+    }
   }
 }

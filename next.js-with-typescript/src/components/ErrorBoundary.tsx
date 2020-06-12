@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, ErrorInfo } from 'react'
 import { ErrorService } from '../errorService'
-import { ErrorServiceContext } from '../errorService/context'
 import { LogCountService } from '../errorService/logCountService'
 
 type ErrorBoundaryProps = {
@@ -23,12 +22,11 @@ class ErrorBoundary extends React.Component<
   errorService = new ErrorService(this.logCountService)
 
   static getDerivedStateFromError(): ErrorBoundaryState {
-    // Update state so the next render will show the fallback UI.
     return { hasError: true }
   }
 
-  componentDidCatch(error: Error): void {
-    // this.errorService.logError(error)
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    this.errorService.logBoundaryError(error, errorInfo)
     console.log(error)
   }
 

@@ -9,10 +9,13 @@
     "lint": "eslint --fix ."
   },
   "dependencies": {
+    "@sentry/browser": "^5.17.0",
+    "@sentry/node": "^5.17.0",
     "axios": "^0.19.2",
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-prerendered-component": "^1.2.4"
   },
   "devDependencies": {
     "@testing-library/react": "^10.2.1",
