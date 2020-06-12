@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "next": "9.4.4",
-    "next-transpile-modules": "^3.3.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "shared": "../shared"
+    "sass": "^1.26.8",
+    "react-common": "git+ssh://git@github.com/myglam/react-common.git#remove-scss-imports-poc",
+    "ipsy-core-styles": "git+ssh://git@github.com:myglam/ipsy-core-styles.git#v17.5.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.10",

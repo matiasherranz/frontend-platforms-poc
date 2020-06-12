@@ -1,0 +1,8 @@
+@import "~react-common/src/components/Header/Header.scss";
+
+// This is a hack for showing the body content
+// This was hidden by default on legacy Angular code
+// We might want to move away from this after sunsetting Angular
+body {
+  opacity: 1;
+}
