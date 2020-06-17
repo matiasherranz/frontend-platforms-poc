@@ -1,6 +1,7 @@
 {
   "name": "frontend-platforms-poc",
   "version": "0.1.0",
+  "author": "Martin Quintana <martinquintana@ipsy.com>",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +12,10 @@
   "dependencies": {
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "sass": "^1.26.8",
+    "react-common": "git+ssh://git@github.com/myglam/react-common.git#remove-scss-imports-poc",
+    "ipsy-core-styles": "git+ssh://git@github.com:myglam/ipsy-core-styles.git#v17.5.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.10",
